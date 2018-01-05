@@ -6,7 +6,7 @@ setup(
   description = 'Integrate over a cuboid made of smaller cuboids',
   author = 'Mike Smith',
   author_email = 'm.t.smith@sheffield.ac.uk',
-  url = 'https://github.com/lionfish0/dp4gp.git',
+  url = 'https://github.com/lionfish0/hypercuboid_integrator.git',
   download_url = 'https://github.com/lionfish0/hypercuboid_integrator.git',
   keywords = ['integrating','hypercubes'],
   classifiers = [],
