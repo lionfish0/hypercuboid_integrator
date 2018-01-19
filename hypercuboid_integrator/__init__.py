@@ -82,7 +82,11 @@ def split(Astart,Aend,Bstart,Bend):
         newsplits = []
         insides = []
         for s in splits:
+            #print(all(s[1]>Bstart) and all(Bend>s[0]))
+            #print(all(a>b for a,b in zip(s[1],Bstart)) and all(a>b for a,b in zip(Bend,s[0])))
+            #print("---")
             if all(a>b for a,b in zip(s[1],Bstart)) and all(a>b for a,b in zip(Bend,s[0])):
+            #if all(s[1]>Bstart) and all(Bend>s[0]):
                 splitslices, inside = splitslice(s[0],s[1],Bstart,Bend,d)
                 newsplits.extend(splitslices)
                 insides.extend(inside)
