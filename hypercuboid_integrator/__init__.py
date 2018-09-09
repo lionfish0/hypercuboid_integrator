@@ -1,5 +1,7 @@
 import numpy as np
+#import numba as nb
 
+#@nb.jit(nb.typeof(([[1.0,1.0],[1.0,1.0]],[True,False]))(nb.double,nb.double,nb.double,nb.double))
 def split1d(Astart,Aend,Bstart,Bend):
     """For a 1-d pair of lines A and B:
     given start and end locations,
@@ -37,7 +39,8 @@ def split1d(Astart,Aend,Bstart,Bend):
     if (Astart<Bstart) and (Bend<Aend):
         #return Astart-Bstart Bstart-Bend Bend-Aend
         return [[Astart,Bstart],[Bstart,Bend],[Bend,Aend]], [False,True,False]
-    
+
+#@nb.jit(nb.typeof(([[1.0,1.0],[1.0,1.0]],[True,False]))(nb.double,nb.double,nb.double,nb.double))
 def splitslice(Astart,Aend,Bstart,Bend,d):
     """given start and end locations, produce new set of points for A split by B
     just in dimension d."""
@@ -60,7 +63,7 @@ def split(Astart,Aend,Bstart,Bend):
     new hypercuboid edges.
     
     For example: split a hypercube, A, that extends from [0,1] to [2,3]
-    with another, B, that extends from [1,1],[2,2]:
+    with another, B, that extends from [1,1],[3,2]:
     
     split([0,1],[2,3],[1,1],[3,2])
     
@@ -82,11 +85,7 @@ def split(Astart,Aend,Bstart,Bend):
         newsplits = []
         insides = []
         for s in splits:
-            #print(all(s[1]>Bstart) and all(Bend>s[0]))
-            #print(all(a>b for a,b in zip(s[1],Bstart)) and all(a>b for a,b in zip(Bend,s[0])))
-            #print("---")
-            #if all(a>b for a,b in zip(s[1],Bstart)) and all(a>b for a,b in zip(Bend,s[0])):
-            if all(s[1]>Bstart) and all(Bend>s[0]):
+            if np.all(s[1]>Bstart) and np.all(Bend>s[0]):
                 splitslices, inside = splitslice(s[0],s[1],Bstart,Bend,d)
                 newsplits.extend(splitslices)
                 insides.extend(inside)
